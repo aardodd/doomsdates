@@ -75,7 +75,7 @@ def closest_doomsdate(year, month, day):
 	is_leapyear = year % 4 == 0
 	shortest = 1000
 
-	for d in doomsdates[(is_leapyear, month)]:
+	for d in doomsdates[(is_leapyear and month <= 2, month)]:
 		if difference(day, d) <= shortest:
 			shortest = d
 
