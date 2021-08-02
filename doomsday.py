@@ -74,7 +74,7 @@ def calculate_doomsday(year):
 def closest_doomsdate(year, month, day):
 	is_leapyear = year % 4 == 0
 	shortest = 1000
-	
+
 	for d in doomsdates[(is_leapyear, month)]:
 		if difference(day, d) <= shortest:
 			shortest = d
@@ -89,5 +89,9 @@ day = int(input("Enter day (1-31): "))
 dday = calculate_doomsday(year)
 closest = closest_doomsdate(year, month, day)
 diff = difference(day, closest)
-	
+
+# count backwards from the closest day if its further ahead than the provided day
+if closest > day:
+	diff = -diff
+
 print(str(year) + "-" + str(month) + "-" + str(day) + " is a " + friendly_doomsday((dday + diff) % 7))
